@@ -101,13 +101,24 @@ const updateBoard =  (index) => {
 
 
 
-function bestMove() {
+function randomMove() {
+    if(currentPlayer == ai){
         var random = Math.floor(Math.random() * 8);
+        var randTime = (Math.floor(Math.random() * 2)+ 1) * 1000;
+
         if(isValidAction(tiles[random]) && isGameActive) {
-            tiles[random].click();
+
+            setTimeout(function(){
+                if(currentPlayer == ai){
+                    tiles[random].click();; //This will be delayed
+                    document.querySelectorAll('.board').forEach(e=>e.style.pointerEvents='auto');
+                }
+            }, randTime);
+            
         }else{
-            bestMove();
+            randomMove();
         }
+    }
 }
 
 
@@ -117,21 +128,22 @@ function bestMove() {
 const changePlayer = () => {
     playerTurn.classList.remove(`Player${currentPlayer}`);
     currentPlayer = currentPlayer  === human ? ai : human;
-    
+    if(currentPlayer == ai && isGameActive){
+        document.querySelectorAll('.board').forEach(e=>e.style.pointerEvents='none');
+    }
+
+
     fontAwesome();
 
     playerTurn.innerHTML = '<i class="fa-' + style + ' fa-' + currentPlayer + '"></i>';
     playerTurn.classList.add(`Player${currentPlayer}`);
 
-    if(currentPlayer == ai){
-        bestMove();
-    }
+    randomMove();
 }
 
 // Player action
 const userAction = (tile, index) => {
     if(isValidAction(tile) && isGameActive) {
-
         fontAwesome();
 
         tile.innerHTML = '<i class="fa-' + style + ' fa-' + currentPlayer + '"></i>';
@@ -157,10 +169,13 @@ const resetBoard = () => {
         tile.classList.remove('Playerxmark');
         tile.classList.remove('Playercircle');
     });
+
+    document.querySelectorAll('.board').forEach(e=>e.style.pointerEvents='auto');
 }
 
+
 tiles.forEach( (tile, index) => {
-    tile.addEventListener('click', () => userAction(tile, index));
+    tile.addEventListener('click', () => userAction(tile, index));  
 });
 
 resetBtn.addEventListener('click', resetBoard);
