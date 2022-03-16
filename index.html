@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>◯TicTacToe✖</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/open-props"/>
+    <script src="https://kit.fontawesome.com/072cf49956.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <section class="title">
+            <h1>TicTacToe</h1>
+        </section>
+        <section class="display Player-Turn">
+            <!-- Player 1 = ✖ | Player 2 = ◯ -->
+            Player <span class="Player Playerxmark"><i class="fa-solid fa-xmark"></i></span>'s turn
+        </section>
+        <section class="board">
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+        </section>
+        <section class="display result hidden"></section>
+        <section class="buttons">
+            <button id="reset">Reset</button>
+        </section>
+    </main>
+    
+    <script src="js/script.js"></script>
+    <!-- <script src="js/random.js"></script> -->
+</body>
+</html>
